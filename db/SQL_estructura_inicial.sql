@@ -29,6 +29,13 @@ CREATE TABLE IF NOT EXISTS `dbconsultas`.`permisos` (
   PRIMARY KEY (`idpermiso`))
 ENGINE = InnoDB;
 
+INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (1,'Salud');
+INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (2,'Asistencia');
+INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (3,'Asesoramiento Legal');
+INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (4,'Transporte');
+INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (5,'Información General');
+INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (6,'Usuarios');
+
 
 -- -----------------------------------------------------
 -- Table `dbconsultas`.`usuarios`
@@ -48,6 +55,13 @@ CREATE TABLE IF NOT EXISTS `dbconsultas`.`usuarios` (
   PRIMARY KEY (`idusuario`),
   UNIQUE INDEX `user_UNIQUE` (`user` ASC))
   ENGINE = InnoDB;
+
+-- user: admin
+-- password: 00025
+INSERT INTO dbconsultas.usuarios(idusuario,user,clave,nombre,apellido,email,telefono,
+tipo_doc,numero_doc,turno,condicion) 
+VALUES (1,'admin','6b6b927655a09cf695b8c4ac4440f8412a0196aa11d0794397392d2c61a4d8b0','Admin','Sistema','','','','','',1);
+
 
 -- -----------------------------------------------------
 -- Table `dbconsultas`.`usuarios-permisos`
@@ -71,13 +85,21 @@ CREATE TABLE IF NOT EXISTS `dbconsultas`.`usuarios_permisos` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,1);
+INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,2);
+INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,3);
+INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,4);
+INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,5);
+INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,6);
+
+
 
 -- -----------------------------------------------------
 -- Table `dbconsultas`.`tipos_consultas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbconsultas`.`tipos_consultas` (
   `idtipoconsulta` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(100) NOT NULL,
+  `nombre` VARCHAR(150) NOT NULL,
   `idpermiso` INT NOT NULL,
   PRIMARY KEY (`idtipoconsulta`),
   INDEX `fk_tipoconsulta_permiso_idx` (`idpermiso` ASC),
@@ -87,6 +109,34 @@ CREATE TABLE IF NOT EXISTS `dbconsultas`.`tipos_consultas` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (1,1,'Certificado alta');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (2,1,'Certificado Sisa');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (3,1,'Certificado aislamiento');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (4,1,'Certificado cumplimiento de cuarentena');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (5,1,'Solicita hisopado');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (6,1,'Derivación a 107');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (7,1,'Seguimiento médico');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (8,1,'Donación de plasma');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (9,1,'Falta de atención nosocomial');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (10,1,'Otras');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (11,2,'Primera asistencia');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (12,2,'Alimentos');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (13,2,'Medicación');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (14,2,'Limpieza');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (15,2,'Gas');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (16,2,'Otras');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (17,3,'Familiar');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (18,3,'Laboral');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (19,3,'Otras');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (20,4,'1-Requisitos y permisos de ingreso/egreso a la provincia de vehículos particulares');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (21,4,'2-Permisos para transportes de carga');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (22,4,'3-Empadronamiento de transportes de cargas provinciales');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (23,4,'4-Requisitos y permisos de ingreso para empresas subcontratistas que deben realizar trabajos en la provincia');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (24,4,'5-Permisos de circulación interdepartamental');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (25,4,'6-Números de contacto de empresas de transporte habilitadas para servicios de paquetería/encomienda');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (26,4,'7-Horario de atención de la Oficina de Informes');
+INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (27,4,'8-Permiso de circulación para caminos rurales dentro del departamento capital');
 
 
 -- -----------------------------------------------------

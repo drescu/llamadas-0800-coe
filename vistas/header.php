@@ -1,9 +1,13 @@
+<?php
+if(strlen(session_id()) < 1)
+  session_start();
+?>  
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Registro Llamadas Coe | www.coe.com</title>
+    <title>Registro Llamadas Coe</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -29,7 +33,7 @@
     <div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>COE</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -50,7 +54,7 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <span class="hidden-xs">Nombre Usuario</span>
+                  <span class="hidden-xs"><?=$_SESSION['nombre']." ".$_SESSION['apellido'];?></span>
                 </a>
                 <ul class="dropdown-menu">
                   
@@ -58,7 +62,7 @@
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                      <a href="../ajax/usuario.php?op=salir" class="btn btn-default btn-flat">Cerrar Sesión</a>
                     </div>
                   </li>
                 </ul>
@@ -77,55 +81,84 @@
           <ul class="sidebar-menu">
             <li class="header"></li>
             <li>
-              <a href="#">
-                <i class="fa fa-tasks"></i> <span>Escritorio</span>
+              <a href="inicio.php">
+                <i class="fa fa-home"></i> <span>Inicio</span>
               </a>
             </li>            
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-user-md"></i>
-                <span>Salud</span>
-                <i class="fa"></i>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-ambulance"></i>
-                <span>Asistencia</span>
-                 <i class="fa fa"></i>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-balance-scale"></i>
-                <span>Asesoramiento Legal</span>
-                 <i class="fa"></i>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-truck"></i>
-                <span>Transporte</span>
-                <i class="fa"></i>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-info"></i>
-                <span>Información General</span>
-                <i class="fa"></i>
-              </a>
-            </li>                     
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-folder"></i> <span>Acceso</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="usuario.php"><i class="fa fa-circle-o"></i> Usuarios</a></li>
-                <li><a href="permiso.php"><i class="fa fa-circle-o"></i> Permisos</a></li>
-              </ul>
-            </li>                        
+            
+            <?php
+            if($_SESSION['salud'] == 1) { 
+              echo '
+                <li class="treeview">
+                  <a href="salud_listado.php">
+                    <i class="fa fa-user-md"></i>
+                    <span>Salud</span>
+                    <i class="fa"></i>
+                  </a>
+                </li>
+              ';    
+            } 
+
+            if($_SESSION['asistencia'] == 1) { 
+              echo '
+                <li class="treeview">
+                  <a href="asistencia_listado.php">
+                    <i class="fa fa-ambulance"></i>
+                    <span>Asistencia</span>
+                    <i class="fa fa"></i>
+                  </a>
+                </li>
+              ';    
+            } 
+
+            if($_SESSION['asesoramiento'] == 1) { 
+              echo '
+                <li class="treeview">
+                  <a href="asesoramiento_listado.php">
+                    <i class="fa fa-balance-scale"></i>
+                    <span>Asesoramiento Legal</span>
+                    <i class="fa"></i>
+                  </a>
+                </li>
+              ';    
+            } 
+
+            if($_SESSION['transporte'] == 1) { 
+              echo '
+                <li class="treeview">
+                  <a href="transporte_listado.php">
+                    <i class="fa fa-truck"></i>
+                    <span>Transporte</span>
+                    <i class="fa"></i>
+                  </a>
+                </li>
+              ';    
+            } 
+
+            if($_SESSION['informacion'] == 1) { 
+              echo '
+                <li class="treeview">
+                  <a href="informacion_listado.php">
+                    <i class="fa fa-info"></i>
+                    <span>Información General</span>
+                    <i class="fa"></i>
+                  </a>
+                </li> 
+              ';    
+            } 
+
+            if($_SESSION['acceso'] == 1) { 
+              echo '
+                <li class="treeview">
+                  <a href="usuario_listado.php">
+                    <i class="fa fa-user"></i>
+                    <span>Usuarios</span>
+                    <i class="fa"></i>
+                  </a>
+                </li> 
+              ';    
+            } 
+            ?>                   
           </ul>
         </section>
         <!-- /.sidebar -->

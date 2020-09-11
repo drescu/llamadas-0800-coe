@@ -6,11 +6,11 @@ session_start();
 if (!isset($_SESSION['nombre'])) {
   header("Location: login.html");
 }
-else {
-
+else 
+{
   require "header.php";
 
-  if($_SESSION['acceso'] == 1) 
+  if($_SESSION['asistencia'] == 1) 
   {
     ?>
     <!--Contenido-->
@@ -23,7 +23,7 @@ else {
           <div class="col-md-12">
             <div class="box">
               <div class="box-header with-border" id="superior">
-                <h1 class="box-title">Usuarios
+                <h1 class="box-title">Consulta
                   <button id="btnAgregar" class="btn btn-success" onclick="mostrarform(true)">
                     <i class="fa fa-plus-circle"></i> Agregar</button>
                 </h1>
@@ -40,29 +40,21 @@ else {
                     <th>Apellido/s</th>
                     <th>Tipo Doc.</th>
                     <th>Numero Doc.</th>
-                    <th>Teléfono</th>
-                    <th>Email</th>
-                    <th>Usuario</th>
-                    <th>Estado</th>
                   </thead>
                   <tbody>
                   </tbody>
                   <tfoot>
-                    <th>Opciones</th>
+                  <th>Opciones</th>
                     <th>Nombre/s</th>
                     <th>Apellido/s</th>
                     <th>Tipo Doc.</th>
                     <th>Numero Doc.</th>
-                    <th>Teléfono</th>
-                    <th>Email</th>
-                    <th>Usuario</th>
-                    <th>Estado</th>
                   </tfoot>
                 </table>
               </div>
               
               <?php
-              require "usuario_registro.php";
+              require "asistencia_registro.php";
               ?>
               
               <!--Fin centro -->
@@ -74,16 +66,15 @@ else {
     </div><!-- /.content-wrapper -->
     <!--Fin-Contenido-->
     <?php
-  }  
+  }
   else {
     require "noacceso.php";
-  } 
+  }  
   
   require "footer.php";
   ?>
+  <script type="text/javascript" src="scripts/consulta.js"></script>
 
-  <script type="text/javascript" src="scripts/usuario.js"></script>
-  
   <?php
 }
 ob_end_flush();

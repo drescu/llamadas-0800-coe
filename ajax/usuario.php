@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "../modelos/Usuario.php";
 
 $usuario = new Usuario();
@@ -110,6 +111,58 @@ switch ($_GET["op"]) {
         }
 
     break;
-}
 
+    case 'verificar':
+        $usera = $_POST['usera'];
+        $clavea = $_POST['clavea'];
+
+        // Hash SHA256 en la contraseña
+        $clavehash = hash("SHA256", $clavea); 
+
+        $rspta = $usuario->verificar($usera, $clavehash);
+
+        $fetch = $rspta->fetch_object();
+
+        if (isset($fetch)) {
+            // Declaramos las variables de sesion
+            $_SESSION['idusuario'] = $fetch->idusuario;        
+            $_SESSION['nombre'] = $fetch->nombre; 
+            $_SESSION['apellido'] = $fetch->apellido;    
+            $_SESSION['user'] = $fetch->user;  
+            
+            // Obtenemos los permisos del usuario
+            $marcados = $usuario->listarmarcados($fetch->idusuario);
+
+            // Declaramos el array para almacenar todos los permisos marcados
+            $valores = array();
+
+            // Almacenamos los permisos marcados en el array
+            while ($per = $marcados->fetch_object()) {
+                array_push($valores, $per->idpermiso);
+            }
+
+            // Determinamos los accesos del usuario
+            in_array(1, $valores) ? $_SESSION['salud'] = 1 : $_SESSION['salud'] = 0;
+            in_array(2, $valores) ? $_SESSION['asistencia'] = 1 : $_SESSION['asistencia'] = 0;
+            in_array(3, $valores) ? $_SESSION['asesoramiento'] = 1 : $_SESSION['asesoramiento'] = 0;
+            in_array(4, $valores) ? $_SESSION['transporte'] = 1 : $_SESSION['transporte'] = 0;
+            in_array(5, $valores) ? $_SESSION['informacion'] = 1 : $_SESSION['informacion'] = 0;
+            in_array(6, $valores) ? $_SESSION['acceso'] = 1 : $_SESSION['acceso'] = 0;
+
+        }
+        echo json_encode($fetch);
+    break;
+
+    case 'salir':
+        // Limpiamos las variables de session
+        session_unset();
+
+        // Destruimos la session
+        session_destroy();
+
+        // Redireccionamos al login
+        header("Location: ../index.php");
+    break;
+
+}
 ?>

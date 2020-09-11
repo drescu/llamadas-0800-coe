@@ -10,19 +10,6 @@ function init() {
     })
 }
 
-    /*
-    // cargamos los items al select categoria
-    $.post("../ajax/evento.php?op=selectCategoria", function(r)
-    {
-        // datos que devuelvo a la vista
-        $("#idcategoria").html(r);
-        $("#idcategoria").selectpicker('refresh');
-    });
-
-    $("#imagenmuestra").hide();
-    */
-
-
 // Funcion limpiar 
 function limpiar() {
     $("#idconsulta").val("");
@@ -62,15 +49,61 @@ function cancelarform() {
 }
 
 function buscarrenaper() {
-    var urlLogin = 'https://federador.msal.gob.ar/masterfile-federacion-service/api/usuarios/aplicacion/login';
+    
+    var urlpost = 'https://federador.msal.gob.ar/masterfile-federacion-service/api/usuarios/aplicacion/login';
     var nombre = 'HQgdGgMcFxMaCl4SEh8FDFwNEksCCBwZEUYCABAAAw==';
     var clave = 'RgwLQFRJASxAEEQOJiMjPkY=';
     var codDominio = '2.16.840.1.113883.2.10.58';
-    var sexo = 2;
-    var dni = 27451387;
-    var urlrequest ='https://federador.msal.gob.ar/masterfile-federacion-service/api/personas/renaper?nroDocumento='+dni+'&idSexo='+sexo;
-    //var token;
+    //var sexo = 2;
+    //var dni = 27451387;
+       
+
+    var bodyParameters = {
+        'nombre': nombre,
+        'clave': clave,
+        'codDominio': codDominio
+    }
+    axios.post( 
+      urlpost,
+      bodyParameters
+    ).then((response) => {
+        token = response.data.token;
+        
+        const api = 'https://federador.msal.gob.ar/masterfile-federacion-service/api/personas/renaper?nroDocumento=27451387&idSexo=2'; 
+
+        axios.get(api, { headers: 
+                {
+                    'token': token,
+                    'odDominio': codDominio
+                } 
+            })
+            .then((response) => {
+                console.log(response)
+            }).catch((error) => {
+                console.log(error)
+            });
+
+        }).catch((error) => {
+            console.log(error)
+        });
     
+    /*
+    var config = {
+        headers: {'Authorization': "bearer " + this.token1}
+    };
+    var bodyParametersGet = {
+    }
+    axios.get( 
+        urlget,
+        config,
+        bodyParametersGet
+    ).then((response) => {
+      console.log(response)
+    }).catch((error) => {
+      console.log(error)
+    });
+
+
     
     axios.post(urlLogin, {  
             'nombre': nombre,
@@ -79,35 +112,19 @@ function buscarrenaper() {
     })
     .then(function(response) {
         var token = response.data.token; // guardo el token devuelto
-        //alert(token);
-        
-        axios.get(urlrequest, {
-            header: {
-                'token':'ffsdfsd',
-                'codDominio':codDominio
-            }    
-        })
-        .then(function(res) {
-            //console.log(token);
-        //mensaje.innerHTML = response.data.title;
-        })
-        .catch(function(err) {
-            //alert(token);
-            console.log(err);
-        });     
-
-
+        $("#buscar").val(token);
+        //console.log(token.data.token);
     })
     .catch(function(err) {
         alert(err);
-        //mensaje.innerText = 'Error de conexión ' + err;
     });
-    //token1 = this.token;
-    //alert(token1);
+
+    //console.log(token);
+    
     axios.get(urlrequest, {
-        params: {
-            'token':this.token,
-            'codDominio':this.codDominio
+        header: {
+            'token': $("#buscar").val(),
+            'codDominio': codDominio
         }
     //responseType: 'json', 
     })
@@ -117,8 +134,23 @@ function buscarrenaper() {
     })
     .catch(function(err) {
         console.log(err);
-    });  
+    }); 
     
+    axios.get(urlrequest, {
+        header: {
+            'token':'ffsdfsd',
+            'codDominio':codDominio
+        }    
+    })
+    .then(function(res) {
+        //console.log(token);
+    //mensaje.innerHTML = response.data.title;
+    })
+    .catch(function(err) {
+        //alert(token);
+        console.log(err);
+    });   
+    */
 
     
 }

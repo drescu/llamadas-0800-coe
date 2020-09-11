@@ -94,6 +94,14 @@ class Usuario {
         return ejecutarConsulta($sql);        
     }
 
+    // Funcion para verificar el acceso al sistema  
+    public function verificar($user, $clave) 
+    {
+        $sql = "SELECT idusuario, nombre, apellido, tipo_doc, numero_doc, telefono, email, user 
+                FROM usuarios WHERE user='$user' AND clave='$clave' AND condicion='1'";
+        return ejecutarConsulta($sql);        
+    }
+
 }
 
 ?>

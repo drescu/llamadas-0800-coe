@@ -68,7 +68,7 @@
       </div>
 
       <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <input type="text" class="form-control" name="buscar" id="buscar" maxlength="20">
+        <input type="text" class="form-control" name="buscar" id="buscar">
       </div>
       <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">  
         <button class="btn btn-warning" onclick="buscarrenaper()" type="button">
