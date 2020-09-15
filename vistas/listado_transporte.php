@@ -10,7 +10,7 @@ else
 {
   require "header.php";
 
-  if($_SESSION['asistencia'] == 1) 
+  if($_SESSION['transporte'] == 1) 
   {
     ?>
     <!--Contenido-->
@@ -54,7 +54,7 @@ else
               </div>
               
               <?php
-              require "asistencia_registro.php";
+              require "registro_consulta.php";
               ?>
               
               <!--Fin centro -->

@@ -90,7 +90,7 @@ if(strlen(session_id()) < 1)
             if($_SESSION['salud'] == 1) { 
               echo '
                 <li class="treeview">
-                  <a href="salud_listado.php">
+                  <a href="listado_salud.php">
                     <i class="fa fa-user-md"></i>
                     <span>Salud</span>
                     <i class="fa"></i>
@@ -102,7 +102,7 @@ if(strlen(session_id()) < 1)
             if($_SESSION['asistencia'] == 1) { 
               echo '
                 <li class="treeview">
-                  <a href="asistencia_listado.php">
+                  <a href="listado_asistencia.php">
                     <i class="fa fa-ambulance"></i>
                     <span>Asistencia</span>
                     <i class="fa fa"></i>
@@ -114,7 +114,7 @@ if(strlen(session_id()) < 1)
             if($_SESSION['asesoramiento'] == 1) { 
               echo '
                 <li class="treeview">
-                  <a href="asesoramiento_listado.php">
+                  <a href="listado_asesoramiento.php">
                     <i class="fa fa-balance-scale"></i>
                     <span>Asesoramiento Legal</span>
                     <i class="fa"></i>
@@ -126,7 +126,7 @@ if(strlen(session_id()) < 1)
             if($_SESSION['transporte'] == 1) { 
               echo '
                 <li class="treeview">
-                  <a href="transporte_listado.php">
+                  <a href="listado_transporte.php">
                     <i class="fa fa-truck"></i>
                     <span>Transporte</span>
                     <i class="fa"></i>
@@ -138,7 +138,7 @@ if(strlen(session_id()) < 1)
             if($_SESSION['informacion'] == 1) { 
               echo '
                 <li class="treeview">
-                  <a href="informacion_listado.php">
+                  <a href="listado_informacion.php">
                     <i class="fa fa-info"></i>
                     <span>Información General</span>
                     <i class="fa"></i>
@@ -150,7 +150,7 @@ if(strlen(session_id()) < 1)
             if($_SESSION['acceso'] == 1) { 
               echo '
                 <li class="treeview">
-                  <a href="usuario_listado.php">
+                  <a href="listado_usuario.php">
                     <i class="fa fa-user"></i>
                     <span>Usuarios</span>
                     <i class="fa"></i>

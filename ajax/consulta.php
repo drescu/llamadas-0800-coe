@@ -4,29 +4,29 @@ require_once "../modelos/Consulta.php";
 $consulta = new Consulta();
 
 $idconsulta = isset($_POST["idconsulta"])? limpiarCadena($_POST["idconsulta"]) : "";
-$idtipoconsulta = isset($_POST["idtipoconsulta"])? limpiarCadena($_POST["idtipoconsulta"]) : ""; 
+$idtipoconsulta = isset($_POST["tipo_consulta"])? limpiarCadena($_POST["tipo_consulta"]) : ""; 
 $idusuario = isset($_POST["idusuario"])? limpiarCadena($_POST["idusuario"]) : "";
-$fecha = isset($_POST["fecha"])? limpiarCadena($_POST["fecha"]) : "";
-$estadopersona = isset($_POST["estadopersona"])? limpiarCadena($_POST["estadopersona"]) : "";
+$estado_persona = isset($_POST["estado_persona"])? limpiarCadena($_POST["estado_persona"]) : "";
 $nombre = isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]) : "";
 $apellido = isset($_POST["apellido"])? limpiarCadena($_POST["apellido"]) : "";
 $tipo_doc = isset($_POST["tipo_doc"])? limpiarCadena($_POST["tipo_doc"]) : "";
 $numero_doc = isset($_POST["numero_doc"])? limpiarCadena($_POST["numero_doc"]) : "";
 $email = isset($_POST["email"])? limpiarCadena($_POST["email"]) : "";
 $telefono = isset($_POST["telefono"])? limpiarCadena($_POST["telefono"]) : "";
-$estadocunsulta = isset($_POST["estadocunsulta"])? limpiarCadena($_POST["estadocunsulta"]) : "";
+$estado_consulta = isset($_POST["estado_consulta"])? limpiarCadena($_POST["estado_consulta"]) : "";
 $observaciones = isset($_POST["observaciones"])? limpiarCadena($_POST["observaciones"]) : "";
+$categoria = isset($_POST["categoria"])? limpiarCadena($_POST["categoria"]) : ""; 
 
-switch ($_GET["op"]) {
-    case 'guardaryeditar':
-        if (empty($idconsulta)) {  
-            $rspta = $consulta->insertar($idtipoconsulta, $idusuario, $fecha, $estadopersona, 
-            $nombre, $apellido, $tipo_doc, $numero_doc, $email, $telefono, $estadocunsulta, 
+switch ($_GET["op"]) { 
+    case 'guardaryeditar': 
+        if (empty($idconsulta)) { 
+            $rspta = $consulta->insertar($idtipoconsulta, $idusuario, $estado_persona, 
+            $nombre, $apellido, $tipo_doc, $numero_doc, $email, $telefono, $estado_consulta, 
             $observaciones);
             echo $rspta ? "Consulta registrada" : "Consulta NO pudo ser registrada";
         } else { 
-            $rspta = $consulta->editar($idconsulta, $idtipoconsulta, $idusuario, $fecha, $estadopersona, 
-            $nombre, $apellido, $tipo_doc, $numero_doc, $email, $telefono, $estadocunsulta, 
+            $rspta = $consulta->editar($idconsulta, $idtipoconsulta, $idusuario, $estado_persona, 
+            $nombre, $apellido, $tipo_doc, $numero_doc, $email, $telefono, $estado_consulta, 
             $observaciones);
             echo $rspta ? "Consulta actualizada" : "Consulta NO se pudo actualizar";
         }
@@ -69,19 +69,17 @@ switch ($_GET["op"]) {
         echo $rspta ? "Consulta eliminada" : "Consulta no pudo ser eliminada";
     break;
 
-    /*
-    case 'selectCategoria':
-        require_once "../modelos/Categoria.php";
-        $categoria = new Categoria();
+    case 'selectTipoConsulta':
         
-        $rspta = $categoria->select();
-
+        $rspta = $consulta->selectTipoConsulta($categoria);
+        
+        //echo '<option value="0">Elija una opción</option>';
+        
         while ($reg = $rspta->fetch_object()) {
-            echo '<option value='.$reg->idcategoria.'>'.$reg->nombre.'</option>';
+            echo '<option value="'.$reg->idtipoconsulta.'">'.$reg->nombre.'</option>';
         }
-        
+
     break;
-    */
 }
 
 ?>

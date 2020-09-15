@@ -10,7 +10,7 @@ else
 {
   require "header.php";
 
-  if($_SESSION['asesoramiento'] == 1) 
+  if($_SESSION['asistencia'] == 1) 
   {
     ?>
     <!--Contenido-->
@@ -54,7 +54,7 @@ else
               </div>
               
               <?php
-              require "asesoramiento_registro.php";
+              require "registro_consulta.php";
               ?>
               
               <!--Fin centro -->
@@ -68,7 +68,7 @@ else
     <?php
   }
   else {
-    require "noacceso.php"; 
+    require "noacceso.php";
   }  
   
   require "footer.php";

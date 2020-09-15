@@ -117,7 +117,7 @@ function mostrar(idusuario) {
         $("#email").val(data.email);
         $("#telefono").val(data.telefono);
         $("#tipo_doc").val(data.tipo_doc);
-        $("#tipo_doc").selectpicker('refresh');
+        //$("#tipo_doc").selectpicker('refresh');
         $("#numero_doc").val(data.numero_doc);
         $("#turno").val(data.turno);
         $("#idusuario").val(data.idusuario);

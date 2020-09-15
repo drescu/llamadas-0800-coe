@@ -10,7 +10,7 @@ else
 {
   require "header.php";
 
-  if($_SESSION['informacion'] == 1) 
+  if($_SESSION['salud'] == 1) 
   {
     ?>
     <!--Contenido-->
@@ -36,17 +36,17 @@ else
                 <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
                   <thead>
                     <th>Opciones</th>
-                    <th>Nombre/s</th>
                     <th>Apellido/s</th>
+                    <th>Nombre/s</th>
                     <th>Tipo Doc.</th>
                     <th>Numero Doc.</th>
                   </thead>
                   <tbody>
                   </tbody>
                   <tfoot>
-                  <th>Opciones</th>
-                    <th>Nombre/s</th>
+                    <th>Opciones</th>
                     <th>Apellido/s</th>
+                    <th>Nombre/s</th>
                     <th>Tipo Doc.</th>
                     <th>Numero Doc.</th>
                   </tfoot>
@@ -54,7 +54,7 @@ else
               </div>
               
               <?php
-              require "informacion_registro.php";
+              require "registro_consulta.php";
               ?>
               
               <!--Fin centro -->

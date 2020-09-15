@@ -100,14 +100,8 @@ INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,6);
 CREATE TABLE IF NOT EXISTS `dbconsultas`.`tipos_consultas` (
   `idtipoconsulta` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(150) NOT NULL,
-  `idpermiso` INT NOT NULL,
-  PRIMARY KEY (`idtipoconsulta`),
-  INDEX `fk_tipoconsulta_permiso_idx` (`idpermiso` ASC),
-  CONSTRAINT `fk_tipoconsulta_permiso`
-    FOREIGN KEY (`idpermiso`)
-    REFERENCES `dbconsultas`.`permisos` (`idpermiso`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `categoria` INT NOT NULL,
+  PRIMARY KEY (`idtipoconsulta`))
 ENGINE = InnoDB;
 
 INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (1,1,'Certificado alta');
@@ -146,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `dbconsultas`.`consultas` (
   `idconsulta` INT NOT NULL AUTO_INCREMENT,
   `idtipoconsulta` INT NOT NULL,
   `idusuario` INT NOT NULL,
-  `fecha` DATETIME NULL,
+  `fecha_registro`  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'guarda automaticamente fecha y hora al momento del insert',
   `estadopersona` VARCHAR(3) NULL COMMENT 'PO=positivo, NE=negativo, HV= hisopado por viajes particulares o laborales, \nHS= hisopado por cuestiones de salud, CO=contacto estrecho\n',
   `nombre` VARCHAR(50) NULL,
   `apellido` VARCHAR(50) NULL,
@@ -156,6 +150,7 @@ CREATE TABLE IF NOT EXISTS `dbconsultas`.`consultas` (
   `telefono` VARCHAR(30) NULL,
   `estadoconsulta` VARCHAR(1) NULL COMMENT 'R=resuelta, P=pendiente, D=derivada',
   `observaciones` TEXT NULL,
+  `condicion` TINYINT NOT NULL DEFAULT 1 COMMENT '1-activo, 0-inactivo',
   PRIMARY KEY (`idconsulta`),
   INDEX `fk_consulta_tipoconsulta_idx` (`idtipoconsulta` ASC),
   INDEX `fk_consulta_usuario_idx` (`idusuario` ASC),
