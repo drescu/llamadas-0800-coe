@@ -19,7 +19,7 @@ function init() {
 // Funcion limpiar 
 function limpiar() {
     $("#user").val("");
-    $("#clave").val("");
+    //$("#clave").val("");
     $("#nombre").val("");
     $("#apellido").val("");
     $("#email").val("");
@@ -28,6 +28,7 @@ function limpiar() {
     $("#tipo_doc").val("DNI");
     $("#turno").val("M");
     $("#idusuario").val("");
+    $("#permisos").val("");
 }
 
 // Funcion mostrar formulario
@@ -40,6 +41,7 @@ function mostrarform(flag) {
         $("#nombre").focus();
         $("#btnGuardar").prop("disabled",false);
         $("#btnAgregar").hide();
+        $("#clave").prop("disabled",false);
     } else {
         // muestra el listado principal
         $("#listadoregistros").show(); 
@@ -111,7 +113,9 @@ function mostrar(idusuario) {
 
         // datos que devuelvo a la vista
         $("#user").val(data.user);
-        $("#clave").val(data.clave);
+        $("#clave").val();
+        $("#clave").prop("disabled",true);
+        $("#btnClave").show();
         $("#nombre").val(data.nombre);
         $("#apellido").val(data.apellido);
         $("#email").val(data.email);
@@ -147,6 +151,22 @@ function activar(idusuario) {
             });
         }
     })
+}
+
+function cambiarClave(idusuario) {
+    
+    bootbox.prompt({
+        title: "Ingrese una nueva contraseña para este usuario",
+        inputType: 'password',
+        callback: function (claveNueva) {
+            if(claveNueva) {
+                $.post("../ajax/usuario.php?op=editarClave",{idusuario : idusuario, claveNueva : claveNueva},function(e){
+                    bootbox.alert(e);
+                    tabla.ajax.reload();
+                });
+            }  
+        }
+    });
 }
 
 init();

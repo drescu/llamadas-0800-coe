@@ -24,7 +24,7 @@ else {
             <div class="box">
               <div class="box-header with-border" id="superior">
                 <h1 class="box-title">Usuarios
-                  <button id="btnAgregar" class="btn btn-success" onclick="mostrarform(true)">
+                  <button id="btnAgregar" class="btn btn-primary" onclick="mostrarform(true)">
                     <i class="fa fa-plus-circle"></i> Agregar</button>
                 </h1>
                 <div class="box-tools pull-right">

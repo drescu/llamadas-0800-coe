@@ -6,6 +6,7 @@ $usuario = new Usuario();
 
 $idusuario = isset($_POST["idusuario"])? limpiarCadena($_POST["idusuario"]) : ""; 
 $user = isset($_POST["user"])? limpiarCadena($_POST["user"]) : ""; 
+$claveNueva = isset($_POST["claveNueva"])? limpiarCadena($_POST["claveNueva"]) : "";
 $clave = isset($_POST["clave"])? limpiarCadena($_POST["clave"]) : "";
 $nombre = isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]) : "";
 $apellido = isset($_POST["apellido"])? limpiarCadena($_POST["apellido"]) : "";
@@ -18,15 +19,16 @@ $turno = isset($_POST["turno"])? limpiarCadena($_POST["turno"]) : "";
 switch ($_GET["op"]) {
     case 'guardaryeditar':
         
-        // Hash SHA256 en la contraseña
-        $clavehash = hash("SHA256", $clave); 
-        
         if (empty($idusuario)) {  
+            
+            // Hash SHA256 en la contraseña
+            $clavehash = hash("SHA256", $clave); 
+
             $rspta = $usuario->insertar($user, $clavehash, $nombre, $apellido, $email, $telefono, 
             $tipo_doc, $numero_doc, $turno, $_POST['permiso']); 
             echo $rspta ? "Usuario registrado" : "No se pudieron registrar todos los datos del usuario";
         } else { 
-            $rspta = $usuario->editar($idusuario, $user, $clavehash, $nombre, $apellido, $email, $telefono, 
+            $rspta = $usuario->editar($idusuario, $user, $nombre, $apellido, $email, $telefono, 
             $tipo_doc, $numero_doc, $turno, $_POST['permiso']);
             echo $rspta ? "Usuario actualizado" : "Usuario No se pudo actualizar";
         }
@@ -47,14 +49,16 @@ switch ($_GET["op"]) {
             $data[] = array(
                 "0" => ($reg->condicion) ?  
                             // condicion verdadera
-                            '<button class="btn btn-warning" onclick="mostrar('.$reg->idusuario.')">
+                            '<button title="Editar" data-toggle="tooltip" class="btn btn-warning" onclick="mostrar('.$reg->idusuario.')">
                             <i class="fa fa-pencil"></i></i></button>'.
-                            ' <button class="btn btn-danger" onclick="desactivar('.$reg->idusuario.')">
-                            <i class="fa fa-close"></i></i></button>' 
+                            ' <button title="Desactivar" data-toggle="tooltip" class="btn btn-danger" onclick="desactivar('.$reg->idusuario.')">
+                            <i class="fa fa-close"></i></i></button>'.
+                            ' <button title="Cambiar contraseña" data-toggle="tooltip" class="btn btn-success" onclick="cambiarClave('.$reg->idusuario.')">
+                            <i class="fa fa-key"></i></i></button>' 
                             //  condicion falsa
-                            : '<button class="btn btn-warning" onclick="mostrar('.$reg->idusuario.')">
+                            : '<button title="Editar" data-toggle="tooltip" class="btn btn-warning" onclick="mostrar('.$reg->idusuario.')">
                             <i class="fa fa-pencil"></i></i></button>'.
-                            ' <button class="btn btn-primary" onclick="activar('.$reg->idusuario.')">
+                            ' <button title="Activar" data-toggle="tooltip" class="btn btn-primary" onclick="activar('.$reg->idusuario.')">
                             <i class="fa fa-check"></i></i></button>',
                 "1" => $reg->nombre,
                 "2" => $reg->apellido,
@@ -162,6 +166,14 @@ switch ($_GET["op"]) {
 
         // Redireccionamos al login
         header("Location: ../index.php");
+    break;
+
+    case 'editarClave': 
+        // Hash SHA256 en la contraseña
+        $clavehash = hash("SHA256", $claveNueva); 
+
+        $rspta = $usuario->editarClave($idusuario, $clavehash);
+        echo $rspta ? "Contraseña actualizada" : "Error: Contraseña no pudo ser actualizada";
     break;
 
 }

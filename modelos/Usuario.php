@@ -33,14 +33,16 @@ class Usuario {
     } 
 
     // Implementamos un metodo para editar registros
-    public function editar($idusuario, $user, $clave, $nombre, $apellido, $email, $telefono, 
+    public function editar($idusuario, $user, $nombre, $apellido, $email, $telefono, 
                     $tipo_doc, $numero_doc, $turno, $permisos) 
     {
-        $sql = "UPDATE usuarios SET user='$user', clave='$clave', nombre='$nombre', 
+        $sql = "UPDATE usuarios SET user='$user', nombre='$nombre', 
                 apellido='$apellido', email='$email', telefono='$telefono', tipo_doc='$tipo_doc',
                 numero_doc='$numero_doc', turno='$turno'
                 WHERE idusuario='$idusuario'"; 
         ejecutarConsulta($sql);
+        
+        
         
         // Eliminamos todos los permisos asignados para volverlos a registrar
         $sqldel = "DELETE FROM usuarios_permisos WHERE idusuario = '$idusuario'";
@@ -101,6 +103,12 @@ class Usuario {
                 FROM usuarios WHERE user='$user' AND clave='$clave' AND condicion='1'";
         return ejecutarConsulta($sql);        
     }
+
+    public function editarClave($idusuario, $clave) 
+    {
+        $sql = "UPDATE usuarios SET clave='$clave' WHERE idusuario='$idusuario'"; 
+        return ejecutarConsulta($sql);
+    }    
 
 }
 

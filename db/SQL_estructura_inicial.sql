@@ -11,36 +11,36 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema dbconsultas
+-- Schema varios_0800coe
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema dbconsultas
+-- Schema varios_0800coe
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `dbconsultas` ;
-USE `dbconsultas` ;
+CREATE SCHEMA IF NOT EXISTS `varios_0800coe` ;
+USE `varios_0800coe` ;
 
 -- -----------------------------------------------------
--- Table `dbconsultas`.`permisos`
+-- Table `varios_0800coe`.`permisos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbconsultas`.`permisos` (
+CREATE TABLE IF NOT EXISTS `varios_0800coe`.`permisos` (
   `idpermiso` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`idpermiso`))
 ENGINE = InnoDB;
 
-INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (1,'Salud');
-INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (2,'Asistencia');
-INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (3,'Asesoramiento Legal');
-INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (4,'Transporte');
-INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (5,'Información General');
-INSERT INTO dbconsultas.permisos(idpermiso,nombre) VALUES (6,'Usuarios');
+INSERT INTO varios_0800coe.permisos(idpermiso,nombre) VALUES (1,'Salud');
+INSERT INTO varios_0800coe.permisos(idpermiso,nombre) VALUES (2,'Asistencia');
+INSERT INTO varios_0800coe.permisos(idpermiso,nombre) VALUES (3,'Asesoramiento Legal');
+INSERT INTO varios_0800coe.permisos(idpermiso,nombre) VALUES (4,'Transporte');
+INSERT INTO varios_0800coe.permisos(idpermiso,nombre) VALUES (5,'Información General');
+INSERT INTO varios_0800coe.permisos(idpermiso,nombre) VALUES (6,'Usuarios');
 
 
 -- -----------------------------------------------------
--- Table `dbconsultas`.`usuarios`
+-- Table `varios_0800coe`.`usuarios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbconsultas`.`usuarios` (
+CREATE TABLE IF NOT EXISTS `varios_0800coe`.`usuarios` (
   `idusuario` INT NOT NULL AUTO_INCREMENT,
   `user` VARCHAR(20) NOT NULL,
   `clave` VARCHAR(64) NOT NULL,
@@ -58,15 +58,15 @@ CREATE TABLE IF NOT EXISTS `dbconsultas`.`usuarios` (
 
 -- user: admin
 -- password: 00025
-INSERT INTO dbconsultas.usuarios(idusuario,user,clave,nombre,apellido,email,telefono,
+INSERT INTO varios_0800coe.usuarios(idusuario,user,clave,nombre,apellido,email,telefono,
 tipo_doc,numero_doc,turno,condicion) 
 VALUES (1,'admin','6b6b927655a09cf695b8c4ac4440f8412a0196aa11d0794397392d2c61a4d8b0','Admin','Sistema','','','','','',1);
 
 
 -- -----------------------------------------------------
--- Table `dbconsultas`.`usuarios-permisos`
+-- Table `varios_0800coe`.`usuarios-permisos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbconsultas`.`usuarios_permisos` (
+CREATE TABLE IF NOT EXISTS `varios_0800coe`.`usuarios_permisos` (
   `idusuariopermiso` INT NOT NULL AUTO_INCREMENT,
   `idusuario` INT NOT NULL,
   `idpermiso` INT NOT NULL,
@@ -75,73 +75,73 @@ CREATE TABLE IF NOT EXISTS `dbconsultas`.`usuarios_permisos` (
   INDEX `fk_idusuariopermiso_permiso_idx` (`idpermiso` ASC),
   CONSTRAINT `fk_idusuariopermiso_usuario`
     FOREIGN KEY (`idusuario`)
-    REFERENCES `dbconsultas`.`usuarios` (`idusuario`)
+    REFERENCES `varios_0800coe`.`usuarios` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_idusuariopermiso_permiso`
     FOREIGN KEY (`idpermiso`)
-    REFERENCES `dbconsultas`.`permisos` (`idpermiso`)
+    REFERENCES `varios_0800coe`.`permisos` (`idpermiso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,1);
-INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,2);
-INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,3);
-INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,4);
-INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,5);
-INSERT INTO dbconsultas.usuarios_permisos(idusuario,idpermiso) VALUES (1,6);
+INSERT INTO varios_0800coe.usuarios_permisos(idusuario,idpermiso) VALUES (1,1);
+INSERT INTO varios_0800coe.usuarios_permisos(idusuario,idpermiso) VALUES (1,2);
+INSERT INTO varios_0800coe.usuarios_permisos(idusuario,idpermiso) VALUES (1,3);
+INSERT INTO varios_0800coe.usuarios_permisos(idusuario,idpermiso) VALUES (1,4);
+INSERT INTO varios_0800coe.usuarios_permisos(idusuario,idpermiso) VALUES (1,5);
+INSERT INTO varios_0800coe.usuarios_permisos(idusuario,idpermiso) VALUES (1,6);
 
 
 
 -- -----------------------------------------------------
--- Table `dbconsultas`.`tipos_consultas`
+-- Table `varios_0800coe`.`tipos_consultas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbconsultas`.`tipos_consultas` (
+CREATE TABLE IF NOT EXISTS `varios_0800coe`.`tipos_consultas` (
   `idtipoconsulta` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(150) NOT NULL,
+  `nombre` VARCHAR (150) NOT NULL,
   `categoria` INT NOT NULL,
   PRIMARY KEY (`idtipoconsulta`))
 ENGINE = InnoDB;
 
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (1,1,'Certificado alta');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (2,1,'Certificado Sisa');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (3,1,'Certificado aislamiento');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (4,1,'Certificado cumplimiento de cuarentena');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (5,1,'Solicita hisopado');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (6,1,'Derivación a 107');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (7,1,'Seguimiento médico');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (8,1,'Donación de plasma');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (9,1,'Falta de atención nosocomial');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (10,1,'Otras');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (11,2,'Primera asistencia');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (12,2,'Alimentos');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (13,2,'Medicación');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (14,2,'Limpieza');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (15,2,'Gas');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (16,2,'Otras');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (17,3,'Familiar');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (18,3,'Laboral');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (19,3,'Otras');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (20,4,'1-Requisitos y permisos de ingreso/egreso a la provincia de vehículos particulares');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (21,4,'2-Permisos para transportes de carga');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (22,4,'3-Empadronamiento de transportes de cargas provinciales');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (23,4,'4-Requisitos y permisos de ingreso para empresas subcontratistas que deben realizar trabajos en la provincia');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (24,4,'5-Permisos de circulación interdepartamental');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (25,4,'6-Números de contacto de empresas de transporte habilitadas para servicios de paquetería/encomienda');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (26,4,'7-Horario de atención de la Oficina de Informes');
-INSERT INTO dbconsultas.tipos_consultas(idtipoconsulta,idpermiso,nombre) VALUES (27,4,'8-Permiso de circulación para caminos rurales dentro del departamento capital');
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (1,'Sin opcion',0);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (2,'Otras',0);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (3,'Certificado alta',1);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (4,'Certificado Sisa',1);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (5,'Certificado aislamiento',1);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (6,'Certificado cumplimiento de cuarentena',1);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (7,'Solicita hisopado',1);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (8,'Derivación a 107',1);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (9,'Seguimiento médico',1);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (10,'Donación de plasma',1);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (11,'Falta de atención nosocomial',1);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (12,'Primera asistencia',2);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (13,'Alimentos',2);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (14,'Medicación',2);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (15,'Limpieza',2);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (16,'Gas',2);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (17,'Familiar',3);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (18,'Laboral',3);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (19,'1-Requisitos y permisos de ingreso/egreso a la provincia de vehículos particulares',4);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (20,'2-Permisos para transportes de carga',4);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (21,'3-Empadronamiento de transportes de cargas provinciales',4);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (22,'4-Requisitos y permisos de ingreso para empresas subcontratistas que deben realizar trabajos en la provincia',4);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (23,'5-Permisos de circulación interdepartamental',4);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (24,'6-Números de contacto de empresas de transporte habilitadas para servicios de paquetería/encomienda',4);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (25,'7-Horario de atención de la Oficina de Informes',4);
+INSERT INTO varios_0800coe.tipos_consultas(idtipoconsulta,nombre,categoria) VALUES (26,'8-Permiso de circulación para caminos rurales dentro del departamento capital',4);
 
 
 -- -----------------------------------------------------
--- Table `dbconsultas`.`consultas`
+-- Table `varios_0800coe`.`consultas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbconsultas`.`consultas` (
+CREATE TABLE IF NOT EXISTS `varios_0800coe`.`consultas` (
   `idconsulta` INT NOT NULL AUTO_INCREMENT,
   `idtipoconsulta` INT NOT NULL,
   `idusuario` INT NOT NULL,
   `fecha_registro`  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'guarda automaticamente fecha y hora al momento del insert',
-  `estadopersona` VARCHAR(3) NULL COMMENT 'PO=positivo, NE=negativo, HV= hisopado por viajes particulares o laborales, \nHS= hisopado por cuestiones de salud, CO=contacto estrecho\n',
+  `estadopersona` VARCHAR(3) NULL COMMENT 'PO=positivo, NE=negativo, HV=hisopado por viajes particulares o laborales, HS=hisopado por cuestiones de salud, CO=contacto estrecho, NA=Ninguna de las anteriores',
+  `otroestadopersona` VARCHAR(50) NULL,
   `nombre` VARCHAR(50) NULL,
   `apellido` VARCHAR(50) NULL,
   `tipo_doc` VARCHAR(3) NULL,
@@ -149,6 +149,12 @@ CREATE TABLE IF NOT EXISTS `dbconsultas`.`consultas` (
   `email` VARCHAR(30) NULL,
   `telefono` VARCHAR(30) NULL,
   `estadoconsulta` VARCHAR(1) NULL COMMENT 'R=resuelta, P=pendiente, D=derivada',
+  `fecha_nac` DATE NULL DEFAULT NULL,
+  `edad` VARCHAR(10) NULL,
+  `sexo` VARCHAR(1) NULL,
+  `barrio` VARCHAR(50) NULL,
+  `calle` VARCHAR(100) NULL,
+  `otrotipoconsulta` VARCHAR(50) NULL,
   `observaciones` TEXT NULL,
   `condicion` TINYINT NOT NULL DEFAULT 1 COMMENT '1-activo, 0-inactivo',
   PRIMARY KEY (`idconsulta`),
@@ -156,12 +162,12 @@ CREATE TABLE IF NOT EXISTS `dbconsultas`.`consultas` (
   INDEX `fk_consulta_usuario_idx` (`idusuario` ASC),
   CONSTRAINT `fk_consulta_tipoconsulta`
     FOREIGN KEY (`idtipoconsulta`)
-    REFERENCES `dbconsultas`.`tipos_consultas` (`idtipoconsulta`)
+    REFERENCES `varios_0800coe`.`tipos_consultas` (`idtipoconsulta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_consulta_usuario`
     FOREIGN KEY (`idusuario`)
-    REFERENCES `dbconsultas`.`usuarios` (`idusuario`)
+    REFERENCES `varios_0800coe`.`usuarios` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

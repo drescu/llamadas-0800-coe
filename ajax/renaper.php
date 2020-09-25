@@ -98,7 +98,11 @@ do {
 curl_close($ch_request);
 
 // devuelve el objeto que trae del renaper con todos los datos
-echo $res_request;
+	echo $res_request;
+
+	
+
+
 
 //............................. fin curl .......................   
 

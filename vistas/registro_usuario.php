@@ -65,7 +65,8 @@
         <input type="password" class="form-control" name="clave" id="clave" maxlength="64" 
         placeholder="Contraseña" required>
       </div>
-    </div> <!-- row -->
+    </div>
+    
     <div class="row">
       <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
         <label>Permisos:</label>
@@ -74,13 +75,13 @@
         </ul>
       </div>
     </div> <!-- row -->
-    
 
     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <button class="btn btn-primary" type="submit" id="btnGuardar">
-        <i class="fa fa-save"></i> Guardar</button>
       <button class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i>
         Cancelar</button>
+      <button class="btn btn-primary" type="submit" id="btnGuardar">
+        <i class="fa fa-save"></i> Guardar</button>  
     </div>
+
   </form>
 </div>

@@ -29,7 +29,7 @@ if(strlen(session_id()) < 1)
     <link rel="stylesheet" href="../public/css/bootstrap-select.min.css">
   </head>
 
-  <body class="hold-transition skin-blue-light sidebar-mini">
+  <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
@@ -96,7 +96,7 @@ if(strlen(session_id()) < 1)
                     <i class="fa"></i>
                   </a>
                 </li>
-              ';    
+              ';
             } 
 
             if($_SESSION['asistencia'] == 1) { 
@@ -108,7 +108,7 @@ if(strlen(session_id()) < 1)
                     <i class="fa fa"></i>
                   </a>
                 </li>
-              ';    
+              '; 
             } 
 
             if($_SESSION['asesoramiento'] == 1) { 
@@ -120,7 +120,7 @@ if(strlen(session_id()) < 1)
                     <i class="fa"></i>
                   </a>
                 </li>
-              ';    
+              '; 
             } 
 
             if($_SESSION['transporte'] == 1) { 
@@ -132,7 +132,7 @@ if(strlen(session_id()) < 1)
                     <i class="fa"></i>
                   </a>
                 </li>
-              ';    
+              ';
             } 
 
             if($_SESSION['informacion'] == 1) { 
@@ -144,13 +144,13 @@ if(strlen(session_id()) < 1)
                     <i class="fa"></i>
                   </a>
                 </li> 
-              ';    
+              '; 
             } 
 
             if($_SESSION['acceso'] == 1) { 
               echo '
                 <li class="treeview">
-                  <a href="listado_usuario.php">
+                  <a href="listado_usuario.php" class="activarRequired">
                     <i class="fa fa-user"></i>
                     <span>Usuarios</span>
                     <i class="fa"></i>
